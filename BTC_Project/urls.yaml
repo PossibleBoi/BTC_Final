@@ -1,0 +1,25 @@
+data:
+  raw_data_path: "data/raw/btc_price.csv"
+  cleaned_data_path: "data/processed/btc_cleaned.csv"
+  train_data_path: "data/processed/train.csv"
+  test_data_path: "data/processed/test.csv"
+
+model:
+  save_model_path: "artifacts/arima_model.pkl"
+  forecast_output_path: "artifacts/forecast.csv"
+
+arima_params:
+  order: [5, 1, 0]        # p, d, q
+  seasonal_order: [0, 0, 0, 0]   # If seasonal ARIMA not used
+  train_size_ratio: 0.85
+
+logging:
+  log_file: "logs/app.log"
+
+api:
+  predict_endpoint: "/predict"
+  train_endpoint: "/train"
+
+misc:
+  random_state: 42
+  freq: "D"               # Daily frequency for BTC dataset

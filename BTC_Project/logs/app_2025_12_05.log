@@ -1,0 +1,270 @@
+[2025-12-05 11:04:48] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:04:48] INFO - root - create_directories - Line 24: Directory ensured: artifacts
+[2025-12-05 11:04:48] INFO - root - create_directories - Line 24: Directory ensured: data/raw
+[2025-12-05 11:04:48] INFO - root - ensure_dirs_from_config - Line 29: Ensured directories: ['data/processed', 'artifacts', 'data/raw']
+[2025-12-05 11:04:48] INFO - root - run_collection - Line 34: Starting data collection step...
+[2025-12-05 11:04:48] INFO - root - create_directories - Line 24: Directory ensured: data/raw
+[2025-12-05 11:04:48] INFO - root - load_raw_data - Line 29: Loading raw BTC dataset...
+[2025-12-05 11:04:48] ERROR - root - main - Line 92: Pipeline failed.
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\data_collection.py", line 30, in load_raw_data
+    df = pd.read_csv(self.raw_data_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'data/raw/btc_price.csv'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\data_collection.py", line 42, in run
+    df = self.load_raw_data()
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\data_collection.py", line 34, in load_raw_data
+    raise CustomException(e)
+          ^^^^^^^^^^^^^^^^^^
+TypeError: CustomException.__init__() missing 1 required positional argument: 'error_detail'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 36, in run_collection
+    df = collector.run()
+         ^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\data_collection.py", line 45, in run
+    raise CustomException(e)
+          ^^^^^^^^^^^^^^^^^^
+TypeError: CustomException.__init__() missing 1 required positional argument: 'error_detail'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 87, in main
+    run_collection(config_path=args.config)
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 40, in run_collection
+    raise CustomException(e)
+          ^^^^^^^^^^^^^^^^^^
+TypeError: CustomException.__init__() missing 1 required positional argument: 'error_detail'
+[2025-12-05 11:07:31] INFO - root - create_directories - Line 24: Directory ensured: data/raw
+[2025-12-05 11:07:31] INFO - root - load_raw_data - Line 29: Loading raw BTC dataset...
+[2025-12-05 11:09:27] INFO - root - run - Line 52: Raw data not found. Downloading new BTC data...
+[2025-12-05 11:09:27] INFO - root - download_btc_data - Line 19: Downloading BTC-USD data from Yahoo Finance...
+[2025-12-05 11:09:29] INFO - root - download_btc_data - Line 27: BTC data downloaded successfully!
+[2025-12-05 11:09:29] INFO - root - save_raw_data - Line 38: Raw BTC data saved to data/raw/btc_price.csv
+[2025-12-05 11:09:55] INFO - root - run - Line 47: Raw data already exists. Loading local file...
+[2025-12-05 11:10:16] INFO - root - run - Line 52: Raw data not found. Downloading new BTC data...
+[2025-12-05 11:10:16] INFO - root - download_btc_data - Line 19: Downloading BTC-USD data from Yahoo Finance...
+[2025-12-05 11:10:20] ERROR - yfinance - download - Line 181: 
+1 Failed download:
+[2025-12-05 11:10:20] ERROR - yfinance - download - Line 194: ['BTC-USD']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+[2025-12-05 11:11:00] INFO - root - run - Line 52: Raw data not found. Downloading new BTC data...
+[2025-12-05 11:11:00] INFO - root - download_btc_data - Line 19: Downloading BTC-USD data from Yahoo Finance...
+[2025-12-05 11:11:02] ERROR - yfinance - download - Line 181: 
+1 Failed download:
+[2025-12-05 11:11:02] ERROR - yfinance - download - Line 194: ['BTC-USD']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+[2025-12-05 11:14:31] INFO - root - run - Line 53: Raw data not found. Downloading new BTC data...
+[2025-12-05 11:14:31] INFO - root - download_btc_data - Line 20: Downloading BTC-USD data from Yahoo Finance...
+[2025-12-05 11:14:34] ERROR - yfinance - download - Line 181: 
+1 Failed download:
+[2025-12-05 11:14:34] ERROR - yfinance - download - Line 194: ['BTC-USD']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+[2025-12-05 11:16:31] INFO - root - run - Line 60: Raw data not found. Downloading new BTC data...
+[2025-12-05 11:16:31] INFO - root - download_btc_data - Line 20: Downloading BTC-USD data from Yahoo Finance...
+[2025-12-05 11:16:33] ERROR - yfinance - download - Line 181: 
+1 Failed download:
+[2025-12-05 11:16:33] ERROR - yfinance - download - Line 194: ['BTC-USD']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+[2025-12-05 11:18:24] INFO - root - run - Line 60: Raw data not found. Downloading new BTC data...
+[2025-12-05 11:18:24] INFO - root - download_btc_data - Line 20: Downloading BTC-USD data from Yahoo Finance...
+[2025-12-05 11:18:24] INFO - root - download_btc_data - Line 35: BTC data downloaded successfully!
+[2025-12-05 11:18:24] INFO - root - save_raw_data - Line 46: Raw BTC data saved to data/raw/btc_price.csv
+[2025-12-05 11:22:01] INFO - root - run - Line 55: Raw data already exists. Loading local file...
+[2025-12-05 11:22:01] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:22:01] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:22:01] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:22:01] INFO - root - clean_data - Line 36: Starting data cleaning...
+[2025-12-05 11:22:01] INFO - root - clean_data - Line 57: Data cleaning complete. Final shape: (4097, 6)
+[2025-12-05 11:22:01] INFO - root - save_dataframe - Line 52: Data saved to data/processed/btc_cleaned.csv
+[2025-12-05 11:22:01] INFO - root - split_data - Line 66: Splitting dataset into train/test sets...
+[2025-12-05 11:22:01] INFO - root - split_data - Line 73: Train shape: (3482, 6), Test shape: (615, 6)
+[2025-12-05 11:22:01] INFO - root - save_dataframe - Line 52: Data saved to data/processed/train.csv
+[2025-12-05 11:22:01] INFO - root - save_dataframe - Line 52: Data saved to data/processed/test.csv
+[2025-12-05 11:22:01] INFO - root - run - Line 90: Data preparation pipeline completed successfully.
+[2025-12-05 11:31:23] INFO - root - run - Line 55: Raw data already exists. Loading local file...
+[2025-12-05 11:31:23] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:31:23] INFO - root - create_directories - Line 24: Directory ensured: artifacts
+[2025-12-05 11:31:23] INFO - root - clean_data - Line 38: Cleaning data...
+[2025-12-05 11:36:51] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:36:51] INFO - root - run - Line 102: Loading raw BTC data...
+[2025-12-05 11:36:51] INFO - root - clean_data - Line 35: Cleaning dataset...
+[2025-12-05 11:36:51] INFO - root - clean_data - Line 80: Dataset cleaned. Final shape: (4097, 10)
+[2025-12-05 11:36:51] INFO - root - save_dataframe - Line 52: Data saved to data/processed/cleaned.csv
+[2025-12-05 11:36:51] INFO - root - save_dataframe - Line 52: Data saved to data/processed/train.csv
+[2025-12-05 11:36:51] INFO - root - save_dataframe - Line 52: Data saved to data/processed/test.csv
+[2025-12-05 11:36:51] INFO - root - run - Line 110: Data preparation complete.
+[2025-12-05 11:37:04] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:37:04] INFO - root - run - Line 102: Loading raw BTC data...
+[2025-12-05 11:37:04] INFO - root - clean_data - Line 35: Cleaning dataset...
+[2025-12-05 11:37:04] INFO - root - clean_data - Line 80: Dataset cleaned. Final shape: (4097, 10)
+[2025-12-05 11:37:05] INFO - root - save_dataframe - Line 52: Data saved to data/processed/cleaned.csv
+[2025-12-05 11:37:05] INFO - root - save_dataframe - Line 52: Data saved to data/processed/train.csv
+[2025-12-05 11:37:05] INFO - root - save_dataframe - Line 52: Data saved to data/processed/test.csv
+[2025-12-05 11:37:05] INFO - root - run - Line 110: Data preparation complete.
+[2025-12-05 11:38:50] INFO - root - create_directories - Line 24: Directory ensured: data/processed
+[2025-12-05 11:38:50] INFO - root - run - Line 97: Loading raw BTC CSV...
+[2025-12-05 11:38:50] INFO - root - clean_data - Line 26: Cleaning dataset...
+[2025-12-05 11:38:50] INFO - root - clean_data - Line 74: Final modeling dataframe shape: (4097, 4)
+[2025-12-05 11:38:50] INFO - root - save_dataframe - Line 52: Data saved to data/processed/cleaned.csv
+[2025-12-05 11:38:50] INFO - root - save_dataframe - Line 52: Data saved to data/processed/train.csv
+[2025-12-05 11:38:50] INFO - root - save_dataframe - Line 52: Data saved to data/processed/test.csv
+[2025-12-05 11:38:50] INFO - root - run - Line 105: Data preparation: DONE.
+[2025-12-05 11:40:46] INFO - root - create_directories - Line 24: Directory ensured: artifacts
+[2025-12-05 11:40:46] INFO - root - load_data - Line 31: Loading train and test CSV files...
+[2025-12-05 12:59:43] INFO - root - create_directories - Line 24: Directory ensured: artifacts
+[2025-12-05 12:59:43] INFO - root - load_data - Line 31: Loading train and test CSV files...
+[2025-12-05 13:00:45] INFO - root - create_directories - Line 24: Directory ensured: artifacts
+[2025-12-05 13:00:45] INFO - root - load_data - Line 31: Loading train and test CSV files...
+[2025-12-05 13:00:45] INFO - root - prepare_xy - Line 42: Preparing X (exogenous) and y (target)...
+[2025-12-05 13:00:45] INFO - root - prepare_xy - Line 67: Saved StandardScaler for exogenous variables.
+[2025-12-05 13:00:45] INFO - root - train_model - Line 76: Training ARIMAX(1,0,1) model (same as notebook)...
+[2025-12-05 13:00:46] INFO - root - train_model - Line 87: ARIMAX model saved successfully.
+[2025-12-05 13:00:46] INFO - root - run - Line 102: Model training completed.
+[2025-12-05 13:07:35] INFO - werkzeug - _log - Line 97: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.19.10.157:5000
+[2025-12-05 13:07:35] INFO - werkzeug - _log - Line 97: [33mPress CTRL+C to quit[0m
+[2025-12-05 13:07:57] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:07:57] "GET / HTTP/1.1" 200 -
+[2025-12-05 13:07:57] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:07:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2025-12-05 13:08:51] ERROR - root - dashboard - Line 48: Dashboard generation failed
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 91, in forecast
+    cleaned, raw = load_data()
+                   ^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 36, in load_data
+    cleaned = pd.read_csv(CLEANED_PATH, parse_dates=["Date"], index_col="Date")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1898, in _make_engine
+    return mapping[engine](f, **self.options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 161, in __init__
+    self._validate_parse_dates_presence(self.names)  # type: ignore[has-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\base_parser.py", line 243, in _validate_parse_dates_presence
+    raise ValueError(
+ValueError: Missing column provided to 'parse_dates': 'Date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\app.py", line 41, in dashboard
+    fc_df = forecast(horizon=horizon, exog_override=exog_override)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 149, in forecast
+    raise CustomException(e)
+custom_exception.CustomException: Error in C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py at line 91: Missing column provided to 'parse_dates': 'Date'
+[2025-12-05 13:08:51] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:08:51] "POST /dashboard HTTP/1.1" 200 -
+[2025-12-05 13:25:30] ERROR - root - dashboard - Line 48: Dashboard generation failed
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 91, in forecast
+    cleaned, raw = load_data()
+                   ^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 36, in load_data
+    cleaned = pd.read_csv(CLEANED_PATH, parse_dates=["Date"], index_col="Date")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1898, in _make_engine
+    return mapping[engine](f, **self.options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 161, in __init__
+    self._validate_parse_dates_presence(self.names)  # type: ignore[has-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\.venv\Lib\site-packages\pandas\io\parsers\base_parser.py", line 243, in _validate_parse_dates_presence
+    raise ValueError(
+ValueError: Missing column provided to 'parse_dates': 'Date'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\app.py", line 41, in dashboard
+    fc_df = forecast(horizon=horizon, exog_override=exog_override)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py", line 149, in forecast
+    raise CustomException(e)
+custom_exception.CustomException: Error in C:\Users\drago\Downloads\Final Project BTC\BTC_Project\pipeline.py at line 91: Missing column provided to 'parse_dates': 'Date'
+[2025-12-05 13:25:30] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:25:30] "POST /dashboard HTTP/1.1" 200 -
+[2025-12-05 13:46:41] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:46:41] "GET / HTTP/1.1" 200 -
+[2025-12-05 13:46:43] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:46:43] "GET / HTTP/1.1" 200 -
+[2025-12-05 13:46:43] ERROR - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:46:43] code 400, message Bad request version ('v\x14j\x19m\x95\x00ÓÓÕè\x04\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+[2025-12-05 13:46:43] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:46:43] "[31m[1m\x16\x03\x01\x07O\x01\x00\x07K\x03\x03\x0dµæ\x09à·ZÆîÕìÌ\x0fÃ\x80!\x06ó\x08ïÖ\x9eV¯T(kÓ\x00\x02\x13\x1c g\x1c\x02\x0bë¢üÂ°\x85q=L\x0f\x8f°¶©± v\x14j\x19m\x95\x00ÓÓÕè\x04\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+[2025-12-05 13:46:43] ERROR - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:46:43] code 400, message Bad request version ('³LX°©ßÜâ\x81E\x05°Â\x9a\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+[2025-12-05 13:46:43] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:46:43] "[31m[1m\x16\x03\x01\x02~\x01\x00\x02z\x03\x03\x07Ã\x93\x1a\x04DO°¡\x9f\x95ß\x0e\x7fïdä\x8e\x95\x99\x0cXù6ý\x06\x9fÄÀ«\x12Ø a$·ÑÕ\x19h\x18¹XíÌÚYH¬\x90\x1e³LX°©ßÜâ\x81E\x05°Â\x9a\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+[2025-12-05 13:46:43] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:46:43] "GET / HTTP/1.1" 200 -
+[2025-12-05 13:46:53] INFO - werkzeug - _log - Line 97: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2025-12-05 13:46:53] INFO - werkzeug - _log - Line 97: [33mPress CTRL+C to quit[0m
+[2025-12-05 13:46:53] INFO - werkzeug - _log - Line 97:  * Restarting with stat
+[2025-12-05 13:46:54] WARNING - werkzeug - _log - Line 97:  * Debugger is active!
+[2025-12-05 13:46:54] INFO - werkzeug - _log - Line 97:  * Debugger PIN: 260-654-746
+[2025-12-05 13:47:00] INFO - root - forecast_tomorrow - Line 72: Loading cleaned dataset...
+[2025-12-05 13:47:00] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:47:00] "[35m[1mGET / HTTP/1.1[0m" 500 -
+[2025-12-05 13:47:00] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:47:00] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+[2025-12-05 13:47:00] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:47:00] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+[2025-12-05 13:47:00] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:47:00] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=uIfY3IP5Qr3dmExKEzf2 HTTP/1.1" 200 -
+[2025-12-05 13:47:00] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:47:00] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+[2025-12-05 13:47:00] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:47:00] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+[2025-12-05 13:48:07] INFO - werkzeug - _log - Line 97: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2025-12-05 13:48:07] INFO - werkzeug - _log - Line 97: [33mPress CTRL+C to quit[0m
+[2025-12-05 13:48:07] INFO - werkzeug - _log - Line 97:  * Restarting with stat
+[2025-12-05 13:48:11] WARNING - werkzeug - _log - Line 97:  * Debugger is active!
+[2025-12-05 13:48:11] INFO - werkzeug - _log - Line 97:  * Debugger PIN: 260-654-746
+[2025-12-05 13:48:11] INFO - root - forecast_tomorrow - Line 72: Loading cleaned dataset...
+[2025-12-05 13:48:11] INFO - root - forecast_tomorrow - Line 75: Recomputing notebook-style features...
+[2025-12-05 13:48:11] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:48:11] "[35m[1mGET / HTTP/1.1[0m" 500 -
+[2025-12-05 13:48:11] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:48:11] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+[2025-12-05 13:48:11] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:48:11] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+[2025-12-05 13:48:11] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:48:11] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=wjR9FzKyIJqCj88JlJhf HTTP/1.1" 200 -
+[2025-12-05 13:48:11] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:48:11] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+[2025-12-05 13:49:48] INFO - werkzeug - _log - Line 97: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2025-12-05 13:49:48] INFO - werkzeug - _log - Line 97: [33mPress CTRL+C to quit[0m
+[2025-12-05 13:49:48] INFO - werkzeug - _log - Line 97:  * Restarting with stat
+[2025-12-05 13:49:50] WARNING - werkzeug - _log - Line 97:  * Debugger is active!
+[2025-12-05 13:49:50] INFO - werkzeug - _log - Line 97:  * Debugger PIN: 260-654-746
+[2025-12-05 13:50:00] INFO - root - forecast_tomorrow - Line 73: Loading cleaned dataset (features)...
+[2025-12-05 13:50:00] INFO - root - forecast_tomorrow - Line 76: Loading raw dataset (for Close prices)...
+[2025-12-05 13:50:00] INFO - root - forecast_tomorrow - Line 87: Generating tomorrow feature row...
+[2025-12-05 13:50:00] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:50:00] "[35m[1mGET / HTTP/1.1[0m" 500 -
+[2025-12-05 13:50:01] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:50:01] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+[2025-12-05 13:50:01] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:50:01] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+[2025-12-05 13:50:01] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:50:01] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=2pogRnYoEnuRn6qSnBwF HTTP/1.1" 200 -
+[2025-12-05 13:50:01] INFO - werkzeug - _log - Line 97: 127.0.0.1 - - [05/Dec/2025 13:50:01] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -

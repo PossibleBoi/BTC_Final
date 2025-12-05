@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BTC Forecast Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #111;
+            color: #eee;
+            padding: 20px;
+        }
+        .card {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .buy { color: #00ff6a; }
+        .sell { color: #ff4444; }
+        .hold { color: #ffaa00; }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Bitcoin Forecast Dashboard</h1>
+
+<div class="card">
+    <h2>Tomorrow Price Prediction</h2>
+    <p><b>Predicted Close:</b> ${{ prediction.Predicted_Close | round(2) }}</p>
+    <p><b>Predicted Log Return:</b> {{ prediction.Predicted_LogReturn | round(6) }}</p>
+    <p><b>Last Close:</b> ${{ prediction.Last_Close | round(2) }}</p>
+
+    <h3>Recommendation:</h3>
+    <p class="
+        {% if 'BUY' in prediction.Recommendation %} buy
+        {% elif 'SELL' in prediction.Recommendation %} sell
+        {% else %} hold
+        {% endif %}">
+        {{ prediction.Recommendation }}
+    </p>
+</div>
+
+<div class="card">
+    <h2>Forecast Visualization</h2>
+    <img src="/{{ forecast_plot }}" alt="Forecast Plot">
+</div>
+
+</body>
+</html>

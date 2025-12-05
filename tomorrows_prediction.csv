@@ -1,0 +1,2 @@
+Date,Current_Price,Expected_Price,Probability_Up,Probability_Down,Base_Signal,Dynamic_Signal,Strong_Signal,Volatility_Status,Price_Lower_Bound,Price_Upper_Bound
+2025-11-27,90149.2109375,89949.28821508643,0.473331982931394,0.526668017068606,SELL,SELL,NEUTRAL,OK,87013.06690172094,92984.59114812175

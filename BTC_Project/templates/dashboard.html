@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>BTC Forecast Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width:1000px; margin:30px auto; }
+    img { max-width:100%; height:auto; border:1px solid #ddd; padding:4px; background:#fff; }
+    table { border-collapse: collapse; width:100%; margin-top:16px; }
+    th, td { border:1px solid #ddd; padding:8px; text-align:center; }
+    th { background:#f2f2f2; }
+    .meta { margin-bottom:12px; font-size:0.9em; color:#555; }
+  </style>
+</head>
+<body>
+  <h1>Forecast Dashboard</h1>
+  <p class="meta">Horizon: {{ horizon }} days</p>
+
+  <div>
+    <img src="{{ plot_url }}" alt="Forecast plot" />
+  </div>
+
+  <h2>Forecast Table</h2>
+  <table>
+    <thead><tr><th>Date</th><th>Predicted LogReturn</th><th>Predicted Price</th></tr></thead>
+    <tbody>
+      {% for r in table %}
+        <tr>
+          <td>{{ r.date.strftime('%Y-%m-%d') if r.date is string or r.date else r.date }}</td>
+          <td>{{ '%.6f'|format(r.pred_logreturn) }}</td>
+          <td>{{ '%.4f'|format(r.pred_price) }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p><a href="/">Back</a></p>
+</body>
+</html>
