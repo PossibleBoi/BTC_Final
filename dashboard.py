@@ -25,9 +25,9 @@ st.set_page_config(
 st.markdown("""
 <style>
     .main-header {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
         font-weight: bold;
-        color: #1f77b4;
+        color: #FFFFFF;
         text-align: center;
         margin-bottom: 1rem;
     }
@@ -42,6 +42,10 @@ st.markdown("""
         padding: 1rem;
         border-radius: 0.5rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    /* Metric labels and values in black */
+    [data-testid="stMetricLabel"], [data-testid="stMetricValue"], [data-testid="stMetricDelta"] {
+        color: #000000 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -311,8 +315,8 @@ def main():
             <h3 style='color: {"green" if prediction["direction"] == "UP" else "red"};'>
                 {prediction['direction']} Direction
             </h3>
-            <p style='font-size: 1.2rem; margin: 0;'>
-                Confidence: <strong>{prediction['confidence']:.1%}</strong>
+            <p style='font-size: 1.2rem; margin: 0; color: #000000;'>
+                <strong style='color: #000000;'>Confidence:</strong> <strong>{prediction['confidence']:.1%}</strong>
             </p>
         </div>
         """, unsafe_allow_html=True)
@@ -346,18 +350,18 @@ def main():
         
         st.markdown(f"""
         <div style='background-color: #f0f2f6; padding: 1.5rem; border-radius: 0.5rem;'>
-            <p style='font-size: 1.1rem; margin: 0.5rem 0;'>
-                <strong>Expected Price:</strong> 
+            <p style='font-size: 1.1rem; margin: 0.5rem 0; color: #000000;'>
+                <strong style='color: #000000;'>Expected Price:</strong> 
                 <span style='font-size: 1.3rem; color: #1f77b4;'>${prediction['expected_price']:,.2f}</span>
             </p>
-            <p style='font-size: 1rem; margin: 0.5rem 0;'>
-                <strong>95% Confidence Range:</strong>
+            <p style='font-size: 1rem; margin: 0.5rem 0; color: #000000;'>
+                <strong style='color: #000000;'>95% Confidence Range:</strong>
             </p>
-            <p style='font-size: 1.1rem; margin: 0.5rem 0; padding-left: 1rem;'>
-                Lower: <span style='color: red;'>${prediction['price_lower']:,.2f}</span><br>
-                Upper: <span style='color: green;'>${prediction['price_upper']:,.2f}</span>
+            <p style='font-size: 1.1rem; margin: 0.5rem 0; padding-left: 1rem; color: #000000;'>
+                <strong style='color: #000000;'>Lower:</strong> <span style='color: red;'>${prediction['price_lower']:,.2f}</span><br>
+                <strong style='color: #000000;'>Upper:</strong> <span style='color: green;'>${prediction['price_upper']:,.2f}</span>
             </p>
-            <p style='font-size: 0.9rem; margin-top: 1rem; color: #666;'>
+            <p style='font-size: 0.9rem; margin-top: 1rem; color: #000000;'>
                 <em>Based on ARIMAX(1,0,1) + GARCH(1,1) model</em>
             </p>
         </div>
