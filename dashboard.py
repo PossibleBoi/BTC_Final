@@ -51,12 +51,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Helper Functions
-@st.cache_data(ttl=1800)  # Cache for 30 minutes
+
+@st.cache_data(ttl=1800)  
 def fetch_crypto_news():
     """Fetch top crypto news from CryptoPanic API"""
     try:
-        # CryptoPanic free API (no key required for basic access)
         url = "https://cryptopanic.com/api/v1/posts/?auth_token=free&public=true&kind=news&filter=rising&currencies=BTC"
         response = requests.get(url, timeout=10)
         
@@ -94,11 +93,12 @@ def get_fallback_news():
 
 @st.cache_data(ttl=3600)
 def download_btc_data(start_date="2014-01-01"):
-    """Download Bitcoin price data"""
+    """Download Bitcoin price data and track download time"""
+    download_time = datetime.now()
     btc = yf.download("BTC-USD", start=start_date, progress=False)
     if isinstance(btc.columns, pd.MultiIndex):
         btc.columns = btc.columns.get_level_values(0)
-    return btc
+    return btc, download_time
 
 def calculate_rsi(series, period=14):
     """Calculate RSI indicator"""
@@ -248,12 +248,12 @@ def train_model(btc):
     model = ARIMA(y_train, exog=X_train, order=(1,0,1))
     model_fit = model.fit()
     
-    # Train GARCH (simplified approach like notebook)
+    # Train GARCH 
     residuals = model_fit.resid
     garch_model = arch_model(residuals * 100, vol='Garch', p=1, q=1)
     garch_fit = garch_model.fit(disp='off')
     
-    # Use last conditional volatility (simplified approach from notebook)
+    # Use last conditional volatility 
     forecast_vol = garch_fit.conditional_volatility.iloc[-1] / 100.0
     
     return model_fit, garch_fit, scaler, forecast_vol, exog_features
@@ -317,8 +317,21 @@ def main():
     
     # Load data and train model
     with st.spinner("Loading Bitcoin data..."):
-        btc = download_btc_data()
+        btc, data_timestamp = download_btc_data()
         btc = prepare_features(btc)
+    
+    # Display data freshness info
+    time_ago = datetime.now() - data_timestamp
+    minutes_ago = int(time_ago.total_seconds() / 60)
+    
+    if minutes_ago < 60:
+        time_display = f"{minutes_ago} minute{'s' if minutes_ago != 1 else ''} ago"
+    else:
+        hours_ago = minutes_ago // 60
+        time_display = f"{hours_ago} hour{'s' if hours_ago != 1 else ''} ago"
+    
+    # Data freshness banner
+    st.info(f"**Data Last Updated:** {data_timestamp.strftime('%Y-%m-%d %H:%M:%S')} ({time_display}) | **Latest Price Date:** {btc.index[-1].strftime('%Y-%m-%d')} | **Cache:** Refreshes every 60 minutes")
     
     with st.spinner("Training models..."):
         model_fit, garch_fit, scaler, forecast_vol, exog_features = train_model(btc)
@@ -363,7 +376,7 @@ def main():
     col_chart, col_gauge = st.columns([2, 1])
     
     with col_chart:
-        st.subheader("Price History & Prediction (6 Months)")
+        st.subheader("Price History & Prediction")
         
         # Filter last 6 months
         last_6m = datetime.now() - timedelta(days=180)
